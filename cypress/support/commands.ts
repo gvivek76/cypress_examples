@@ -35,3 +35,25 @@
 //     }
 //   }
 // }
+Cypress.Commands.add('login', (username, password) => {
+    
+    // Fill in the username and password fields
+    cy.get("#username").type(username);
+    cy.get("#password").type(password);
+  
+    // Submit the form
+    cy.get("button").contains("Submit").click();
+  
+    
+        // cy.url().should('include','/logged-in-successfully/')
+        // return cy.url()
+        return cy.url().then((url) => {
+            if (url.includes('/logged-in-successfully/')) {
+              return true; // Login successful
+            } else {
+              return false; // Login failed
+    
+            }
+        })
+   
+  });
